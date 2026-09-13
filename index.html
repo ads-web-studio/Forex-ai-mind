@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurora Stay Hotel — Millbrook Quarter</title>
+<meta name="description" content="Aurora Stay Hotel: 68 rooms in the Millbrook Quarter, two minutes from the convention center. Standard, Deluxe, Family and Business Suite rooms, an in-house restaurant, and 24/7 reception. Book direct.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2316233B'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='%23C9A46A' font-family='Georgia'%3EA%3C/text%3E%3C/svg%3E">
+
+<meta property="og:title" content="Aurora Stay Hotel">
+<meta property="og:description" content="68 rooms in the Millbrook Quarter. Book direct for our best rate.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0F1826">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Hotel",
+  "name": "Aurora Stay Hotel",
+  "description": "A 68-room hotel in the Millbrook Quarter offering Standard, Deluxe, Family and Business Suite rooms, an in-house restaurant, free WiFi and 24/7 reception.",
+  "priceRange": "$109-$219",
+  "telephone": "+1-555-014-7732",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "14 Millbrook Lane",
+    "addressLocality": "Riverside",
+    "postalCode": "10001",
+    "addressCountry": "US"
+  }
+}
+</script>
+
+<link rel="manifest" href="data:application/manifest+json,{%22name%22:%22Aurora%20Stay%20Hotel%22,%22short_name%22:%22Aurora%20Stay%22,%22display%22:%22standalone%22,%22background_color%22:%22%23FAF7F1%22,%22theme_color%22:%22%230F1826%22}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="config.js"></script>
+
+<style>
+/* ============================================================
+   TOKENS
+============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --paper:#FAF7F1;
+  --ink:#16233B;
+  --ink-2:#0F1826;
+  --charcoal:#262420;
+  --brass:#AD8144;
+  --brass-light:#C9A46A;
+  --sage:#5F6F52;
+  --line:#E3DACB;
+  --white:#FFFFFF;
+  --shadow:0 24px 60px -24px rgba(15,24,19,0.35);
+  --maxw:1240px;
+}
+body{
+  font-family:'General Sans',sans-serif;
+  color:var(--charcoal);
+  background:var(--paper);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.display{
+  font-family:'Fraunces',serif;
+  font-weight:500;
+  letter-spacing:-0.01em;
+  color:var(--ink);
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+input,select,textarea{font-family:inherit;font-size:1rem}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+@media(max-width:640px){.wrap{padding:0 20px}}
+
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--brass);
+  display:block;
+  margin-bottom:14px;
+}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px 28px;
+  font-size:.95rem;font-weight:500;
+  border-radius:2px;
+  transition:transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease;
+  white-space:nowrap;
+}
+.btn-brass{background:var(--brass);color:var(--white)}
+.btn-brass:hover{background:#96692F;transform:translateY(-2px)}
+.btn-ghost{border:1px solid rgba(255,255,255,.55);color:var(--white)}
+.btn-ghost:hover{background:rgba(255,255,255,.12);transform:translateY(-2px)}
+.btn-outline{border:1px solid var(--ink);color:var(--ink)}
+.btn-outline:hover{background:var(--ink);color:var(--white);transform:translateY(-2px)}
+.btn-sm{padding:10px 20px;font-size:.85rem}
+.btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible{
+  outline:2px solid var(--brass);outline-offset:3px;
+}
+
+/* Visible by default. Only hidden-then-revealed once JS confirms it can
+   actually run the reveal animation — this way, if a script fails to load
+   or IntersectionObserver misbehaves in some environment, content (including
+   every photo) is still shown rather than stuck invisible. */
+.reveal{opacity:1;transform:none}
+.js-reveal-ready .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease, transform .8s ease}
+.js-reveal-ready .reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  *{animation:none !important}
+}
+
+/* ============================================================
+   NAV
+============================================================ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:22px 0;
+  transition:background .35s ease, padding .35s ease, box-shadow .35s ease;
+}
+.nav.solid{background:var(--ink-2);padding:14px 0;box-shadow:0 8px 30px rgba(0,0,0,.2)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:'Fraunces',serif;font-size:1.35rem;color:var(--white);display:flex;align-items:center;gap:10px}
+.brand-mark{width:30px;height:30px;border-radius:6px;background:var(--brass);display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--white);flex-shrink:0}
+.nav-links{display:flex;gap:34px;align-items:center}
+.nav-links a{color:rgba(255,255,255,.85);font-size:.92rem;transition:color .2s}
+.nav-links a:hover{color:var(--brass-light)}
+.nav-cta{display:flex;gap:14px;align-items:center}
+.nav-toggle{display:none;color:var(--white);background:none;border:none;font-size:1.4rem}
+@media(max-width:900px){
+  .nav-links{display:none}
+  .nav-toggle{display:block}
+  .nav.open .nav-links{
+    display:flex;flex-direction:column;gap:0;position:absolute;top:100%;left:0;right:0;
+    background:var(--ink-2);padding:8px 20px 20px;
+  }
+  .nav.open .nav-links a{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+  .nav-cta .btn-ghost{display:none}
+}
+
+/* ============================================================
+   HERO
+============================================================ */
+.hero{
+  position:relative;height:100vh;min-height:640px;
+  display:flex;align-items:center;
+  overflow:hidden;
+  background:var(--ink-2);
+}
+.hero-img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  animation:kenburns 26s ease-in-out infinite alternate;
+  opacity:.72;
+}
+@keyframes kenburns{from{transform:scale(1) translate(0,0)}to{transform:scale(1.12) translate(-1%,-1%)}}
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(15,24,19,.55) 0%, rgba(15,24,19,.35) 40%, rgba(15,24,19,.85) 100%);
+}
+.hero-content{position:relative;z-index:2;color:var(--white);max-width:640px}
+.hero-content .eyebrow{color:var(--brass-light)}
+.hero-content h1{font-size:clamp(2.4rem,5.2vw,4rem);line-height:1.06;margin-bottom:20px;color:var(--white)}
+.hero-content p{font-size:1.1rem;color:rgba(255,255,255,.85);margin-bottom:32px;max-width:520px}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap}
+
+/* Booking bar — docked over the hero/next-section seam */
+.book-bar{
+  position:relative;z-index:5;
+  max-width:var(--maxw);margin:0 auto;
+  margin-top:-46px;
+  background:var(--white);
+  border-radius:4px;
+  box-shadow:var(--shadow);
+  padding:26px 30px;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 1fr auto;
+  gap:20px;
+  align-items:end;
+}
+.book-field{display:flex;flex-direction:column;gap:6px}
+.book-field label{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:#8A8172;font-weight:500}
+.book-field input,.book-field select{
+  border:none;border-bottom:1.5px solid var(--line);padding:8px 2px;font-size:.98rem;color:var(--ink);background:transparent;
+}
+.book-field input:focus,.book-field select:focus{outline:none;border-color:var(--brass)}
+.book-bar .btn{height:44px}
+@media(max-width:900px){
+  .book-bar{grid-template-columns:1fr 1fr;margin-top:-30px;padding:22px}
+  .book-bar .btn{grid-column:1/-1}
+}
+
+.aurora-line{height:3px;background:linear-gradient(90deg,var(--ink) 0%,var(--brass) 50%,var(--sage) 100%);opacity:.85}
+
+/* ============================================================
+   SECTION SCAFFOLDING
+============================================================ */
+section{padding:110px 0}
+@media(max-width:900px){section{padding:76px 0}}
+.section-head{max-width:640px;margin-bottom:56px}
+.section-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem);line-height:1.12}
+.section-head p{margin-top:16px;color:#5B5648;font-size:1.05rem}
+.section-alt{background:var(--ink-2);color:rgba(255,255,255,.88)}
+.section-alt h2,.section-alt h3{color:var(--white)}
+.section-alt .section-head p{color:rgba(255,255,255,.65)}
+
+/* ============================================================
+   ABOUT
+============================================================ */
+.about-grid{display:grid;grid-template-columns:0.85fr 1fr;gap:70px;align-items:center}
+.about-grid img{border-radius:4px;width:100%;height:520px;object-fit:cover}
+.about-stats{display:flex;gap:36px;margin-top:34px;padding-top:28px;border-top:1px solid var(--line)}
+.about-stats div strong{display:block;font-family:'Fraunces',serif;font-size:1.7rem;color:var(--ink)}
+.about-stats div span{font-size:.82rem;color:#8A8172}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:36px}.about-grid img{height:340px}}
+
+/* ============================================================
+   ROOMS
+============================================================ */
+.room-row{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;padding:56px 0;border-bottom:1px solid var(--line)}
+.room-row:last-child{border-bottom:none}
+.room-row:nth-child(even) .room-media{order:2}
+.room-media img{width:100%;height:420px;object-fit:cover;border-radius:4px}
+.room-body .room-index{font-family:'IBM Plex Mono',monospace;color:var(--brass);font-size:.78rem;letter-spacing:.1em}
+.room-body h3{font-size:1.9rem;margin:10px 0 14px}
+.room-body p.desc{color:#5B5648;margin-bottom:22px}
+.room-meta{display:flex;gap:22px;margin-bottom:22px;flex-wrap:wrap}
+.room-meta span{font-size:.85rem;color:#8A8172}
+.room-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.room-tags span{border:1px solid var(--line);border-radius:20px;padding:6px 14px;font-size:.8rem;color:#5B5648}
+.room-price{display:flex;align-items:baseline;gap:6px;margin-bottom:22px}
+.room-price strong{font-family:'Fraunces',serif;font-size:1.9rem;color:var(--ink)}
+.room-price span{color:#8A8172;font-size:.88rem}
+@media(max-width:900px){
+  .room-row{grid-template-columns:1fr;gap:26px}
+  .room-row:nth-child(even) .room-media{order:0}
+  .room-media img{height:280px}
+}
+
+/* ============================================================
+   AMENITIES
+============================================================ */
+.amenities-list{display:grid;grid-template-columns:1fr 1fr;column-gap:60px;row-gap:0;border-top:1px solid rgba(255,255,255,.14)}
+.amenity{display:flex;align-items:flex-start;gap:18px;padding:26px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+.amenity svg{flex-shrink:0;width:26px;height:26px;color:var(--brass-light);margin-top:2px}
+.amenity h4{font-family:'Fraunces',serif;font-weight:500;font-size:1.12rem;color:var(--white);margin-bottom:4px}
+.amenity p{font-size:.9rem;color:rgba(255,255,255,.62)}
+@media(max-width:700px){.amenities-list{grid-template-columns:1fr}}
+
+/* ============================================================
+   GALLERY
+============================================================ */
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:14px}
+.gallery-grid img{width:100%;height:100%;object-fit:cover;border-radius:3px;cursor:pointer;transition:opacity .3s}
+.gallery-grid img:hover{opacity:.85}
+.g1{grid-column:span 2;grid-row:span 2}
+.g4{grid-column:span 2}
+.g6{grid-row:span 2}
+@media(max-width:800px){
+  .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:130px}
+  .g1{grid-column:span 2;grid-row:span 1}
+}
+
+/* ============================================================
+   RESTAURANT
+============================================================ */
+.rest-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.rest-grid img{border-radius:4px;width:100%;height:480px;object-fit:cover}
+.rest-body p.desc{color:#5B5648;margin:18px 0 26px}
+.rest-hours{display:flex;gap:34px;margin:26px 0;padding:20px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.rest-hours div span{display:block;font-size:.78rem;color:#8A8172;text-transform:uppercase;letter-spacing:.06em}
+.rest-hours div strong{font-family:'Fraunces',serif;font-size:1.1rem;color:var(--ink)}
+.rest-actions{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.qr-box{background:var(--white);padding:10px;border-radius:4px;box-shadow:var(--shadow)}
+.qr-box p{font-size:.72rem;text-align:center;color:#8A8172;margin-top:6px}
+@media(max-width:900px){.rest-grid{grid-template-columns:1fr;gap:32px}.rest-grid img{height:300px}}
+
+/* ============================================================
+   REVIEWS
+============================================================ */
+.review-wrap{max-width:760px;margin:0 auto;text-align:center}
+.review-quote{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:clamp(1.3rem,2.6vw,1.8rem);line-height:1.5;color:var(--ink);min-height:170px;transition:opacity .4s}
+.review-attr{margin-top:26px;font-size:.9rem;color:#8A8172}
+.review-attr strong{color:var(--ink);font-weight:500}
+.review-dots{display:flex;justify-content:center;gap:10px;margin-top:30px}
+.review-dots button{width:8px;height:8px;border-radius:50%;background:var(--line);transition:background .3s}
+.review-dots button.active{background:var(--brass)}
+
+/* ============================================================
+   LOCATION
+============================================================ */
+.loc-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:0;border-radius:4px;overflow:hidden;box-shadow:var(--shadow)}
+.loc-grid iframe{width:100%;height:460px;border:0;display:block}
+.loc-card{background:var(--ink);color:var(--white);padding:44px 38px;display:flex;flex-direction:column;justify-content:center;gap:22px}
+.loc-card h3{color:var(--white);font-size:1.5rem}
+.loc-item span{display:block;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--brass-light);margin-bottom:4px}
+.loc-item p{color:rgba(255,255,255,.85)}
+@media(max-width:900px){.loc-grid{grid-template-columns:1fr}.loc-grid iframe{height:320px}}
+
+/* ============================================================
+   CONTACT
+============================================================ */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px}
+.form-field{margin-bottom:20px}
+.form-field label{display:block;font-size:.82rem;color:#8A8172;margin-bottom:8px}
+.form-field input,.form-field textarea{
+  width:100%;border:1px solid var(--line);border-radius:3px;padding:12px 14px;background:var(--white);
+}
+.form-field textarea{min-height:120px;resize:vertical}
+.contact-info{display:flex;flex-direction:column;gap:26px}
+.contact-info .ci-row{display:flex;gap:16px;align-items:flex-start}
+.contact-info svg{width:22px;height:22px;color:var(--brass);flex-shrink:0;margin-top:3px}
+.contact-info h4{font-size:.95rem;margin-bottom:4px}
+.contact-info p{color:#5B5648;font-size:.94rem}
+.form-msg{margin-top:14px;font-size:.9rem;display:none}
+.form-msg.show{display:block}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr;gap:40px}}
+
+/* ============================================================
+   BOOKING SECTION
+============================================================ */
+.booking-panel{max-width:720px;margin:0 auto;background:var(--white);border:1px solid var(--line);border-radius:6px;padding:44px;box-shadow:var(--shadow)}
+.booking-panel .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.booking-confirm{display:none;text-align:center;padding:40px 20px}
+.booking-confirm.show{display:block}
+.booking-confirm .check{width:56px;height:56px;border-radius:50%;background:var(--sage);color:var(--white);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:1.6rem}
+@media(max-width:640px){.booking-panel{padding:26px}.booking-panel .grid2{grid-template-columns:1fr}}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+footer{background:var(--ink-2);color:rgba(255,255,255,.6);padding:64px 0 28px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.1)}
+.foot-grid h5{color:var(--white);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px}
+.foot-grid a,.foot-grid p{display:block;font-size:.9rem;color:rgba(255,255,255,.6);margin-bottom:10px}
+.foot-grid a:hover{color:var(--brass-light)}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;font-size:.8rem;flex-wrap:wrap;gap:12px}
+@media(max-width:800px){.foot-grid{grid-template-columns:1fr 1fr;gap:30px}}
+
+/* Lightbox */
+.lightbox{position:fixed;inset:0;background:rgba(15,24,19,.92);z-index:200;display:none;align-items:center;justify-content:center;padding:30px}
+.lightbox.show{display:flex}
+.lightbox img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:4px}
+.lightbox-close{position:absolute;top:24px;right:32px;color:var(--white);font-size:2rem;background:none;border:none}
+</style>
+</head>
+<body>
+
+<!-- ============================================================ NAV ============================================================ -->
+<nav class="nav" id="siteNav">
+  <div class="wrap">
+    <a href="#top" class="brand"><span class="brand-mark">A</span>Aurora Stay Hotel</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#rooms">Rooms</a>
+      <a href="#amenities">Amenities</a>
+      <a href="#restaurant">Restaurant</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#booking" class="btn btn-ghost btn-sm">Book Your Stay</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================ HERO ============================================================ -->
+<header class="hero" id="top">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1762420873965-c01e357950ac?w=1800&q=80&auto=format&fit=crop" alt="Aurora Stay Hotel facade lit at dusk">
+  <div class="wrap">
+    <div class="hero-content">
+      <span class="eyebrow">Millbrook Quarter · Est. 2014</span>
+      <h1>A hotel that remembers your name, not just your reservation number.</h1>
+      <p>68 rooms, two minutes from the convention center, a block from the river promenade. Book direct and skip the third-party markup.</p>
+      <div class="hero-actions">
+        <a href="#booking" class="btn btn-brass">Check Availability</a>
+        <a href="#rooms" class="btn btn-ghost">Explore Rooms</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Docked booking bar -->
+<div class="wrap">
+  <form class="book-bar" id="heroBookForm">
+    <div class="book-field">
+      <label for="hCheckin">Check-in</label>
+      <input type="date" id="hCheckin" required>
+    </div>
+    <div class="book-field">
+      <label for="hCheckout">Check-out</label>
+      <input type="date" id="hCheckout" required>
+    </div>
+    <div class="book-field">
+      <label for="hRoom">Room type</label>
+      <select id="hRoom">
+        <option value="">Any room</option>
+      </select>
+    </div>
+    <div class="book-field">
+      <label for="hGuests">Guests</label>
+      <select id="hGuests">
+        <option>1</option><option selected>2</option><option>3</option><option>4</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-brass">Search</button>
+  </form>
+</div>
+<div class="aurora-line"></div>
+
+<!-- ============================================================ ABOUT ============================================================ -->
+<section id="about">
+  <div class="wrap about-grid">
+    <img class="reveal" src="https://images.unsplash.com/photo-1758193783649-13371d7fb8dd?w=1000&q=80&auto=format&fit=crop" alt="Aurora Stay Hotel lobby and reception desk">
+    <div class="reveal">
+      <span class="eyebrow">Our story</span>
+      <h2>Built by two hoteliers who were tired of hotels that felt like airports.</h2>
+      <p style="margin-top:18px;color:#5B5648">Aurora Stay opened in 2014 when Maren Voss and Daniel Cho, both longtime hospitality managers, decided the mid-size hotel category deserved better: the reliability travelers need for business, with the kind of attention you'd expect from a much smaller inn. No call-center check-in, no upsell scripts — just a front desk that's staffed by people who actually work here, day after day.</p>
+      <p style="margin-top:14px;color:#5B5648">Today that means 68 rooms across four categories, an in-house kitchen that doesn't outsource breakfast, and free parking in a neighborhood where every other hotel charges for it.</p>
+      <div class="about-stats">
+        <div><strong>68</strong><span>Rooms, four categories</span></div>
+        <div><strong>2014</strong><span>Opened</span></div>
+        <div><strong>24/7</strong><span>Staffed reception</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ ROOMS ============================================================ -->
+<section id="rooms" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Rooms</span>
+      <h2>Four room types. No surprise fees at check-out.</h2>
+      <p>Every room includes free WiFi, a smart TV, and blackout curtains as standard. Prices are per night, before local tax.</p>
+    </div>
+    <div id="roomsList"><!-- populated by JS, falls back to static markup below if needed --></div>
+  </div>
+</section>
+
+<!-- ============================================================ AMENITIES ============================================================ -->
+<section id="amenities" class="section-alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Amenities</span>
+      <h2>What's included, without asking.</h2>
+    </div>
+    <div class="amenities-list">
+      <div class="amenity reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8.5a15 15 0 0 1 20 0M5.5 12a10 10 0 0 1 13 0M9 15.5a5 5 0 0 1 6 0"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+        <div><h4>Free WiFi</h4><p>Fast enough for video calls, in every room and public space, no login codes.</p></div>
+      </div>
+      <div class="amenity reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 3v18M4 8h5a3 3 0 0 1 0 6H4"/><path d="M14 3c0 3-2 3-2 6s2 3 2 6-2 3-2 6"/><path d="M18 3c0 3-2 3-2 6s2 3 2 6-2 3-2 6"/></svg>
+        <div><h4>Breakfast</h4><p>Cooked-to-order breakfast served 6:30–10:30 daily in The Birch Room.</p></div>
+      </div>
+      <div class="amenity reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h18M5 12V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v5M4 21v-3h16v3"/></svg>
+        <div><h4>Restaurant &amp; Bar</h4><p>The Birch Room is open to guests and walk-ins from 6:30am to 10pm.</p></div>
+      </div>
+      <div class="amenity reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M12 12v4"/></svg>
+        <div><h4>Free Parking</h4><p>On-site garage, no charge for registered guests — a rarity downtown.</p></div>
+      </div>
+      <div class="amenity reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="14" rx="1"/><path d="M8 21h8M12 18v3"/></svg>
+        <div><h4>Conference Room</h4><p>Seats up to 24, screen and whiteboard included, half or full-day rates.</p></div>
+      </div>
+      <div class="amenity reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V10a8 8 0 0 1 16 0v9M2 19h20"/><path d="M10 22h4"/></svg>
+        <div><h4>Room Service</h4><p>Full menu delivered to your door, 6:30am to midnight.</p></div>
+      </div>
+      <div class="amenity reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        <div><h4>24/7 Reception</h4><p>A real person at the desk at 3am, not a call center three time zones away.</p></div>
+      </div>
+      <div class="amenity reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21l6-6M14 4l6 6-8.5 8.5a2 2 0 0 1-2.83 0l-3.17-3.17a2 2 0 0 1 0-2.83L14 4z"/></svg>
+        <div><h4>Express Laundry</h4><p>Same-day service if dropped off before 9am, delivered to your room.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ GALLERY ============================================================ -->
+<section id="gallery">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Gallery</span>
+      <h2>A closer look around the hotel.</h2>
+    </div>
+    <div class="gallery-grid reveal">
+      <img class="g1" data-full="https://images.unsplash.com/photo-1762420873965-c01e357950ac?w=1600&q=80&auto=format&fit=crop" src="https://images.unsplash.com/photo-1762420873965-c01e357950ac?w=700&q=75&auto=format&fit=crop" alt="Hotel exterior at dusk">
+      <img data-full="https://images.unsplash.com/photo-1758193783649-13371d7fb8dd?w=1600&q=80&auto=format&fit=crop" src="https://images.unsplash.com/photo-1758193783649-13371d7fb8dd?w=500&q=75&auto=format&fit=crop" alt="Hotel lobby">
+      <img data-full="https://images.unsplash.com/photo-1746549855427-57e6da7040db?w=1600&q=80&auto=format&fit=crop" src="https://images.unsplash.com/photo-1746549855427-57e6da7040db?w=500&q=75&auto=format&fit=crop" alt="Deluxe room">
+      <img class="g4" data-full="https://images.unsplash.com/photo-1770902971693-8d638e97a496?w=1600&q=80&auto=format&fit=crop" src="https://images.unsplash.com/photo-1770902971693-8d638e97a496?w=800&q=75&auto=format&fit=crop" alt="Restaurant table setting">
+      <img class="g6" data-full="https://images.unsplash.com/photo-1755613708939-d572099433ab?w=1600&q=80&auto=format&fit=crop" src="https://images.unsplash.com/photo-1755613708939-d572099433ab?w=500&q=75&auto=format&fit=crop" alt="Business suite">
+      <img data-full="https://images.unsplash.com/photo-1744534637336-6110864236fc?w=1600&q=80&auto=format&fit=crop" src="https://images.unsplash.com/photo-1744534637336-6110864236fc?w=500&q=75&auto=format&fit=crop" alt="Standard room">
+      <img data-full="https://images.unsplash.com/photo-1737517302831-e7b8a8eaa97c?w=1600&q=80&auto=format&fit=crop" src="https://images.unsplash.com/photo-1737517302831-e7b8a8eaa97c?w=500&q=75&auto=format&fit=crop" alt="Family room">
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ RESTAURANT ============================================================ -->
+<section id="restaurant">
+  <div class="wrap rest-grid">
+    <div class="rest-body reveal">
+      <span class="eyebrow">In-house restaurant</span>
+      <h2>The Birch Room</h2>
+      <p class="desc">A seasonal American-European menu that doesn't try too hard: proper breakfast, a burger that's actually good, and a wine list picked by someone who tastes it. Open to hotel guests and the neighborhood alike.</p>
+      <div class="rest-hours">
+        <div><span>Breakfast</span><strong>6:30 – 10:30</strong></div>
+        <div><span>Lunch &amp; Dinner</span><strong>12:00 – 22:00</strong></div>
+        <div><span>Bar</span><strong>Until midnight</strong></div>
+      </div>
+      <div class="rest-actions">
+        <a href="menu.html" class="btn btn-outline">View Digital Menu</a>
+        <div class="qr-box">
+          <div id="qrcode"></div>
+          <p>Scan for menu</p>
+        </div>
+      </div>
+    </div>
+    <img class="reveal" src="https://images.unsplash.com/photo-1770902971693-8d638e97a496?w=1000&q=80&auto=format&fit=crop" alt="The Birch Room restaurant table setting">
+  </div>
+</section>
+
+<!-- ============================================================ REVIEWS ============================================================ -->
+<section id="reviews">
+  <div class="wrap">
+    <div class="review-wrap reveal">
+      <span class="eyebrow">Guest reviews</span>
+      <p class="review-quote" id="reviewQuote"></p>
+      <p class="review-attr" id="reviewAttr"></p>
+      <div class="review-dots" id="reviewDots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ LOCATION ============================================================ -->
+<section id="location" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Location</span>
+      <h2>Two minutes from the convention center.</h2>
+    </div>
+    <div class="loc-grid reveal">
+      <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-74.012%2C40.705%2C-73.995%2C40.715&layer=mapnik&marker=40.710%2C-74.003" loading="lazy" title="Map showing Aurora Stay Hotel location"></iframe>
+      <div class="loc-card">
+        <h3>Find us</h3>
+        <div class="loc-item"><span>Address</span><p>14 Millbrook Lane, Riverside, 10001</p></div>
+        <div class="loc-item"><span>From the airport</span><p>25 minutes by car, or take the Blue Line to Millbrook Station (4 min walk).</p></div>
+        <div class="loc-item"><span>Parking</span><p>Free on-site garage entrance on Dock Street.</p></div>
+        <a href="https://www.openstreetmap.org/?mlat=40.710&mlon=-74.003#map=16/40.710/-74.003" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" style="align-self:flex-start;margin-top:6px">Open in Maps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ BOOKING ============================================================ -->
+<section id="booking" class="section-alt">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin:0 auto 44px;text-align:center;max-width:560px">
+      <span class="eyebrow">Book your stay</span>
+      <h2>Reserve direct — no booking-site markup.</h2>
+      <p>We'll confirm by email within a few hours. No payment is taken now.</p>
+    </div>
+    <div class="booking-panel reveal">
+      <form id="bookingForm">
+        <div class="grid2">
+          <div class="form-field"><label for="bCheckin">Check-in</label><input type="date" id="bCheckin" required></div>
+          <div class="form-field"><label for="bCheckout">Check-out</label><input type="date" id="bCheckout" required></div>
+        </div>
+        <div class="grid2">
+          <div class="form-field"><label for="bRoom">Room type</label><select id="bRoom" required></select></div>
+          <div class="form-field"><label for="bGuests">Guests</label><select id="bGuests"><option>1</option><option selected>2</option><option>3</option><option>4</option></select></div>
+        </div>
+        <div class="grid2">
+          <div class="form-field"><label for="bName">Full name</label><input type="text" id="bName" required></div>
+          <div class="form-field"><label for="bPhone">Phone number</label><input type="tel" id="bPhone" required></div>
+        </div>
+        <div class="form-field"><label for="bEmail">Email</label><input type="email" id="bEmail" required></div>
+        <div class="form-field"><label for="bNotes">Special requests (optional)</label><textarea id="bNotes" rows="3"></textarea></div>
+        <button type="submit" class="btn btn-brass" style="width:100%">Request Booking</button>
+        <p class="form-msg" id="bookingMsg"></p>
+      </form>
+      <div class="booking-confirm" id="bookingConfirm">
+        <div class="check">✓</div>
+        <h3>Request received</h3>
+        <p style="margin-top:10px;color:#5B5648">Thank you, <span id="confirmName"></span>. We've received your request for <span id="confirmRoom"></span> and will confirm by email at <span id="confirmEmail"></span> shortly.</p>
+        <button class="btn btn-outline" style="margin-top:24px" onclick="resetBookingForm()">Make another request</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ CONTACT ============================================================ -->
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <span class="eyebrow">Contact</span>
+      <h2 style="margin-bottom:26px">Questions before you book?</h2>
+      <form id="contactForm">
+        <div class="form-field"><label for="cName">Name</label><input type="text" id="cName" required></div>
+        <div class="form-field"><label for="cEmail">Email</label><input type="email" id="cEmail" required></div>
+        <div class="form-field"><label for="cMessage">Message</label><textarea id="cMessage" rows="4" required></textarea></div>
+        <button type="submit" class="btn btn-brass">Send Message</button>
+        <p class="form-msg" id="contactMsg"></p>
+      </form>
+    </div>
+    <div class="contact-info reveal">
+      <div class="ci-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.99.36 1.96.68 2.89a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.19-1.25a2 2 0 0 1 2.11-.45c.93.32 1.9.55 2.89.68A2 2 0 0 1 22 16.92z"/></svg>
+        <div><h4>Phone</h4><p>+1 (555) 014-7732</p></div>
+      </div>
+      <div class="ci-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v16H4z"/><path d="m4 4 8 8 8-8"/></svg>
+        <div><h4>Email</h4><p>stay@aurorastayhotel.com</p></div>
+      </div>
+      <div class="ci-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <div><h4>Address</h4><p>14 Millbrook Lane, Riverside, 10001</p></div>
+      </div>
+      <a href="https://wa.me/15550147732" target="_blank" rel="noopener" class="btn btn-outline" style="align-self:flex-start;margin-top:6px">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.1-.3.2-.6.1a7.6 7.6 0 0 1-3.8-3.3c-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5L9.4 7.1c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3A3 3 0 0 0 6.6 9c0 1.4 1 2.8 1.1 3a11.6 11.6 0 0 0 5 4.4c1.8.7 2.2.6 2.6.6.7-.1 1.6-.7 1.9-1.3s.3-1.1.2-1.2-.2-.1-.5-.2z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/></svg>
+        Chat on WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ FOOTER ============================================================ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="brand" style="margin-bottom:14px"><span class="brand-mark">A</span>Aurora Stay Hotel</div>
+        <p>14 Millbrook Lane, Riverside, 10001</p>
+      </div>
+      <div>
+        <h5>Explore</h5>
+        <a href="#rooms">Rooms</a><a href="#amenities">Amenities</a><a href="#restaurant">Restaurant</a><a href="#gallery">Gallery</a>
+      </div>
+      <div>
+        <h5>Guest</h5>
+        <a href="#booking">Book a Room</a><a href="menu.html">Digital Menu</a><a href="#contact">Contact</a>
+      </div>
+      <div>
+        <h5>Staff</h5>
+        <a href="admin.html">Admin Dashboard</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Aurora Stay Hotel. All rights reserved.</span>
+      <span>Site by ADS Web Studio</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">×</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+/* ============================================================
+   DATA — fallback content (used until Supabase is configured,
+   or if a request fails, so the demo never looks broken)
+============================================================ */
+const FALLBACK_ROOMS = [
+  {slug:'standard',name:'Standard Room',description:"A calm, well-lit room built for one clean job: a genuinely good night's sleep before you get on with your day. Queen bed, a proper desk if you need it, and a shower that doesn't make you wait for hot water.",price_per_night:109,size_sqm:22,max_guests:2,amenities:['Free WiFi','Queen bed','Work desk','Rain shower','Smart TV','Blackout curtains'],image_url:'https://images.unsplash.com/photo-1744534637336-6110864236fc?w=1400&q=80&auto=format&fit=crop'},
+  {slug:'deluxe',name:'Deluxe Room',description:"More room to spread out, a soaking tub instead of just a shower, and a reading chair by the window for the nights you'd rather stay in. Our most-booked room for a reason.",price_per_night:149,size_sqm:28,max_guests:2,amenities:['Free WiFi','King bed','Soaking tub','Minibar','Lounge chair','Courtyard view'],image_url:'https://images.unsplash.com/photo-1746549855427-57e6da7040db?w=1400&q=80&auto=format&fit=crop'},
+  {slug:'family',name:'Family Room',description:"One king for the adults, two twins for the kids, and enough floor space that nobody's tripping over a suitcase at 7am. Ask about connecting doors when you book.",price_per_night:179,size_sqm:38,max_guests:4,amenities:['Free WiFi','King + 2 twin beds','Mini-fridge','Sofa area','Connecting room option','Smart TV'],image_url:'https://images.unsplash.com/photo-1737517302831-e7b8a8eaa97c?w=1400&q=80&auto=format&fit=crop'},
+  {slug:'business',name:'Business Suite',description:"A separate living area so a call doesn't have to happen next to the bed, a desk built for actual laptop work, and express laundry when the trip runs longer than the suitcase planned for.",price_per_night:219,size_sqm:45,max_guests:2,amenities:['Free WiFi','Separate living area','Ergonomic desk','City view','Express laundry','Lounge access'],image_url:'https://images.unsplash.com/photo-1755613708939-d572099433ab?w=1400&q=80&auto=format&fit=crop'}
+];
+
+const REVIEWS = [
+  {quote:"Front desk remembered my name on night two and had decaf waiting without me asking.",name:"Priya M.",tag:"Business traveler, 4-night stay"},
+  {quote:"Room was quiet enough I actually used the do-not-disturb sign — first hotel in a while where the AC didn't clatter all night.",name:"Tomasz K.",tag:"Leisure stay"},
+  {quote:"Booked the family room for a wedding weekend. Kids had space to spread out and the connecting door to my in-laws' room saved everyone's sanity.",name:"Renee A.",tag:"Family stay, 3 nights"}
+];
+
+const isConfigured = typeof SUPABASE_URL !== 'undefined' && !SUPABASE_URL.includes('YOUR_SUPABASE');
+
+document.querySelectorAll('img').forEach(img => {
+  img.referrerPolicy = 'no-referrer';
+  img.addEventListener('error', () => console.warn('Image failed to load:', img.src), { once:true });
+});
+
+/* ============================================================ NAV ============================================================ */
+const nav = document.getElementById('siteNav');
+window.addEventListener('scroll', () => nav.classList.toggle('solid', window.scrollY > 40));
+document.getElementById('navToggle').addEventListener('click', () => nav.classList.toggle('open'));
+document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+/* ============================================================ SCROLL REVEAL ============================================================ */
+let io = null;
+try {
+  if ('IntersectionObserver' in window) {
+    document.documentElement.classList.add('js-reveal-ready');
+    io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:0.15});
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    // Safety net: if anything is still unrevealed after 3s (e.g. an element
+    // the observer never caught), reveal it anyway rather than leave it hidden.
+    setTimeout(() => document.querySelectorAll('.reveal:not(.in)').forEach(el => el.classList.add('in')), 3000);
+  }
+} catch (e) {
+  document.documentElement.classList.remove('js-reveal-ready');
+  console.warn('Reveal animation disabled, showing content directly:', e);
+}
+
+/* ============================================================ ROOMS ============================================================ */
+function roomCardHTML(room, index) {
+  const tags = (room.amenities || []).slice(0,4).map(a => `<span>${a}</span>`).join('');
+  return `
+  <div class="room-row reveal">
+    <div class="room-media"><img src="${room.image_url}" alt="${room.name}" loading="lazy"></div>
+    <div class="room-body">
+      <span class="room-index">0${index + 1}</span>
+      <h3>${room.name}</h3>
+      <div class="room-meta"><span>${room.size_sqm ? room.size_sqm + ' m²' : ''}</span><span>Sleeps ${room.max_guests}</span></div>
+      <p class="desc">${room.description}</p>
+      <div class="room-tags">${tags}</div>
+      <div class="room-price"><strong>$${Number(room.price_per_night).toFixed(0)}</strong><span>/ night</span></div>
+      <button class="btn btn-outline" onclick="bookRoom('${room.slug}','${room.name.replace(/'/g,"\\'")}')">Book This Room</button>
+    </div>
+  </div>`;
+}
+
+async function loadRooms() {
+  let rooms = FALLBACK_ROOMS;
+  if (isConfigured) {
+    try {
+      const { data, error } = await supabaseClient.from('rooms').select('*').eq('is_active', true).order('sort_order');
+      if (!error && data && data.length) rooms = data;
+    } catch (e) { console.warn('Using fallback room data:', e); }
+  }
+  document.getElementById('roomsList').innerHTML = rooms.map(roomCardHTML).join('');
+  if (io) document.querySelectorAll('#roomsList .reveal').forEach(el => io.observe(el));
+
+  const roomOptions = rooms.map(r => `<option value="${r.slug}">${r.name} — $${Number(r.price_per_night).toFixed(0)}/night</option>`).join('');
+  document.getElementById('hRoom').innerHTML += roomOptions;
+  document.getElementById('bRoom').innerHTML = `<option value="">Select a room</option>${roomOptions}`;
+  window._auroraRooms = rooms;
+}
+loadRooms();
+
+function bookRoom(slug, name) {
+  document.getElementById('bRoom').value = slug;
+  document.getElementById('booking').scrollIntoView({behavior:'smooth'});
+}
+
+/* ============================================================ HERO BOOKING BAR → scroll + prefill ============================================================ */
+document.getElementById('heroBookForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  document.getElementById('bCheckin').value = document.getElementById('hCheckin').value;
+  document.getElementById('bCheckout').value = document.getElementById('hCheckout').value;
+  document.getElementById('bRoom').value = document.getElementById('hRoom').value;
+  document.getElementById('bGuests').value = document.getElementById('hGuests').value;
+  document.getElementById('booking').scrollIntoView({behavior:'smooth'});
+});
+
+/* ============================================================ BOOKING FORM SUBMIT ============================================================ */
+document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const slug = document.getElementById('bRoom').value;
+  const room = (window._auroraRooms || FALLBACK_ROOMS).find(r => r.slug === slug);
+  const payload = {
+    room_id: room && room.id ? room.id : null,
+    room_name: room ? room.name : 'Any available room',
+    check_in: document.getElementById('bCheckin').value,
+    check_out: document.getElementById('bCheckout').value,
+    guests: Number(document.getElementById('bGuests').value),
+    full_name: document.getElementById('bName').value,
+    email: document.getElementById('bEmail').value,
+    phone: document.getElementById('bPhone').value,
+    special_requests: document.getElementById('bNotes').value || null
+  };
+  const msg = document.getElementById('bookingMsg');
+  if (isConfigured) {
+    try {
+      const { error } = await supabaseClient.from('bookings').insert(payload);
+      if (error) throw error;
+    } catch (err) {
+      msg.textContent = "We couldn't reach the booking system just now — please call or WhatsApp us to confirm directly.";
+      msg.classList.add('show');
+      return;
+    }
+  }
+  document.getElementById('confirmName').textContent = payload.full_name;
+  document.getElementById('confirmRoom').textContent = payload.room_name;
+  document.getElementById('confirmEmail').textContent = payload.email;
+  document.getElementById('bookingForm').style.display = 'none';
+  document.getElementById('bookingConfirm').classList.add('show');
+});
+function resetBookingForm() {
+  document.getElementById('bookingForm').reset();
+  document.getElementById('bookingForm').style.display = 'block';
+  document.getElementById('bookingConfirm').classList.remove('show');
+  document.getElementById('bookingMsg').classList.remove('show');
+}
+
+/* ============================================================ CONTACT FORM SUBMIT ============================================================ */
+document.getElementById('contactForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const payload = {
+    name: document.getElementById('cName').value,
+    email: document.getElementById('cEmail').value,
+    message: document.getElementById('cMessage').value
+  };
+  const msg = document.getElementById('contactMsg');
+  if (isConfigured) {
+    try {
+      const { error } = await supabaseClient.from('contact_messages').insert(payload);
+      if (error) throw error;
+    } catch (err) {
+      msg.textContent = "Message couldn't be sent — please email us directly at stay@aurorastayhotel.com.";
+      msg.classList.add('show');
+      return;
+    }
+  }
+  msg.textContent = "Thanks — we'll reply within one business day.";
+  msg.classList.add('show');
+  document.getElementById('contactForm').reset();
+});
+
+/* ============================================================ REVIEWS ROTATOR ============================================================ */
+let reviewIndex = 0;
+const quoteEl = document.getElementById('reviewQuote');
+const attrEl = document.getElementById('reviewAttr');
+const dotsEl = document.getElementById('reviewDots');
+REVIEWS.forEach((_, i) => {
+  const b = document.createElement('button');
+  b.addEventListener('click', () => showReview(i));
+  dotsEl.appendChild(b);
+});
+function showReview(i) {
+  reviewIndex = i;
+  const r = REVIEWS[i];
+  quoteEl.style.opacity = 0;
+  setTimeout(() => {
+    quoteEl.textContent = `"${r.quote}"`;
+    attrEl.innerHTML = `<strong>${r.name}</strong> — ${r.tag}`;
+    quoteEl.style.opacity = 1;
+  }, 200);
+  [...dotsEl.children].forEach((d, idx) => d.classList.toggle('active', idx === i));
+}
+showReview(0);
+setInterval(() => showReview((reviewIndex + 1) % REVIEWS.length), 6500);
+
+/* ============================================================ GALLERY LIGHTBOX ============================================================ */
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+document.querySelectorAll('.gallery-grid img').forEach(img => {
+  img.addEventListener('click', () => {
+    lightboxImg.src = img.dataset.full;
+    lightboxImg.alt = img.alt;
+    lightbox.classList.add('show');
+  });
+});
+document.getElementById('lightboxClose').addEventListener('click', () => lightbox.classList.remove('show'));
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('show'); });
+
+/* ============================================================ QR CODE ============================================================ */
+if (typeof QRCode !== 'undefined') {
+  new QRCode(document.getElementById('qrcode'), {
+    text: window.location.href.replace(/index\.html.*$/,'') + 'menu.html',
+    width: 96, height: 96, colorDark: '#16233B', colorLight: '#ffffff'
+  });
+}
+
+/* Set sensible min dates on booking inputs */
+const today = new Date().toISOString().split('T')[0];
+['hCheckin','hCheckout','bCheckin','bCheckout'].forEach(id => document.getElementById(id).min = today);
+</script>
+</body>
+</html>
